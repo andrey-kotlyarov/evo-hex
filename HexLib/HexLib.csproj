@@ -43,6 +43,7 @@
     <Compile Include="HCell.cs" />
     <Compile Include="HCellEntity.cs" />
     <Compile Include="HGrid.cs" />
+    <Compile Include="HGridDirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
