@@ -15,6 +15,13 @@ namespace HexLib
 
         private HCell[,] _cells;
 
+
+
+        public int Rows { get { return _rows; } private set { _rows = value; } }
+        public int Cols { get { return _cols; } private set { _cols = value; } }
+
+        public HCell[,] Cells { get { return _cells; } private set { _cells = value; } }
+
         public HGrid(int rows, int cols)
         {
             _rows = rows;

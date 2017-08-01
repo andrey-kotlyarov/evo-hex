@@ -58,7 +58,7 @@
             // 
             this.pbGrid.Location = new System.Drawing.Point(13, 116);
             this.pbGrid.Name = "pbGrid";
-            this.pbGrid.Size = new System.Drawing.Size(308, 187);
+            this.pbGrid.Size = new System.Drawing.Size(308, 308);
             this.pbGrid.TabIndex = 2;
             this.pbGrid.TabStop = false;
             // 
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 452);
+            this.ClientSize = new System.Drawing.Size(614, 452);
             this.Controls.Add(this.btnDraw);
             this.Controls.Add(this.pbGrid);
             this.Controls.Add(this.btnTest);
