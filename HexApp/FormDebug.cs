@@ -49,7 +49,7 @@ namespace HexApp
         private void drawGrid()
         {
 
-            HGrid grid = new HGrid(10, 10);
+            HGrid grid = new HGrid(12, 12);
 
 
 
@@ -57,42 +57,108 @@ namespace HexApp
             Brush brushWall = Brushes.Maroon;
             Brush brushEmpty = Brushes.LightGray;
             Brush brushBot = Brushes.Navy;
-            Brush brushFood = Brushes.Green;
-            Brush brushToxin = Brushes.OrangeRed;
+            //Brush brushFood = Brushes.Green;
+            //Brush brushToxin = Brushes.OrangeRed;
 
             Font fontBot = new Font(FontFamily.GenericSansSerif, 6.0F, FontStyle.Regular);
             Brush brushFont = Brushes.White;
 
-            Font fontBot2 = new Font(FontFamily.GenericSansSerif, 5.0F, FontStyle.Bold);
-            Brush brushFont2 = Brushes.Yellow;
+            //Font fontBot2 = new Font(FontFamily.GenericSansSerif, 5.0F, FontStyle.Bold);
+            //Brush brushFont2 = Brushes.Yellow;
 
-            Font fontBot3 = new Font(FontFamily.GenericSansSerif, 7.0F, FontStyle.Bold);
-            Brush brushFont3 = Brushes.Yellow;
+            //Font fontBot3 = new Font(FontFamily.GenericSansSerif, 7.0F, FontStyle.Bold);
+            //Brush brushFont3 = Brushes.Yellow;
 
             Graphics g = _pbGridBufferGraphics.Graphics;
 
-
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(colorGrid);
 
+            HCell[] cells = grid.Cells;
+            HCell cell;
 
-            HCell[,] cells = grid.Cells;
+            float r = 25F;
+            float dx = 2.0F * r * (float)Math.Sin(Math.PI / 3);
+            float dy = 1.5F * r;
 
-            int size = 24;
+
+            float r2 = 24F;
+            float dx2 = 2.0F * r2 * (float)Math.Sin(Math.PI / 3);
+            float dy2 = 1.5F * r2;
 
 
-            for (int row = 0; row < grid.Rows; row++)
+            for (int i = 0; i < cells.Length; i++)
             {
-                for (int col = 0; col < grid.Cols; col++)
+                cell = cells[i];
+
+                float x = cell.ColIndex * dx + 1 + (cell.RowIndex % 2 == 0 ? 0 : dx / 2) + r;
+                float y = cell.RowIndex * dy + 1 + r;
+
+                PointF[] points = new PointF[]
                 {
-                    int px = col * size + 1;
-                    int py = row * size + 1;
+                        new PointF(x, y - r2),
+                        new PointF(x + dx2 / 2, y - r2 / 2),
+                        new PointF(x + dx2 / 2, y + r2 / 2),
+                        new PointF(x, y + r2),
+                        new PointF(x - dx2 / 2, y + r2 / 2),
+                        new PointF(x - dx2 / 2, y - r2 / 2)
+                };
 
-                    Rectangle r = new Rectangle(px + 1, py + 1, size - 2, size - 2);
-                    Rectangle rc = new Rectangle(px + 3, py + 3, size - 6, size - 6);
+                byte[] bytes = new byte[] { 1, 1, 1, 1, 1, 1 };
 
-                    g.FillRectangle(brushEmpty, r);
+                System.Drawing.Drawing2D.GraphicsPath p = new System.Drawing.Drawing2D.GraphicsPath(points, bytes, System.Drawing.Drawing2D.FillMode.Winding);
+                g.FillPath(brushEmpty, p);
+            }
+            
+
+            cell = cells[27];
+            HCell[] neiborCells = cell.getNeiborCells();
+
+            for (int i = 0; i < neiborCells.Length; i++)
+            {
+                HCell neiborCell = neiborCells[i];
+                if (neiborCell != null)
+                {
+                    float x = neiborCell.ColIndex * dx + 1 + (neiborCell.RowIndex % 2 == 0 ? 0 : dx / 2) + r;
+                    float y = neiborCell.RowIndex * dy + 1 + r;
+
+                    PointF[] points = new PointF[]
+                    {
+                        new PointF(x, y - r2),
+                        new PointF(x + dx2 / 2, y - r2 / 2),
+                        new PointF(x + dx2 / 2, y + r2 / 2),
+                        new PointF(x, y + r2),
+                        new PointF(x - dx2 / 2, y + r2 / 2),
+                        new PointF(x - dx2 / 2, y - r2 / 2)
+                    };
+
+                    byte[] bytes = new byte[] { 1, 1, 1, 1, 1, 1 };
+
+                    System.Drawing.Drawing2D.GraphicsPath p = new System.Drawing.Drawing2D.GraphicsPath(points, bytes, System.Drawing.Drawing2D.FillMode.Winding);
+                    g.FillPath(brushBot, p);
                 }
             }
+
+            
+
+            for (int i = 0; i < cells.Length; i++)
+            {
+                cell = cells[i];
+
+                float x = cell.ColIndex * dx + 1 + (cell.RowIndex % 2 == 0 ? 0 : dx / 2) + r;
+                float y = cell.RowIndex * dy + 1 + r;
+                
+                g.DrawString(cell.RowIndex.ToString() + "," + cell.ColIndex.ToString(), fontBot, brushFont, x - r / 3, y - r / 3);
+            }
+
+
+
+
+
+
+
+
+
             /*
             for (int y = 0; y < ESetting.GRID_SIZE_Y; y++)
             {

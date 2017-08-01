@@ -10,6 +10,7 @@ namespace HexLib
 {
     public class HCell
     {
+        private HGrid _grid;
         private int _rowIndex;
         private int _colIndex;
 
@@ -23,12 +24,21 @@ namespace HexLib
         
 
 
-        public HCell(int rowIndex, int colIndex)
+        public HCell(HGrid grid, int rowIndex, int colIndex)
         {
+            _grid = grid;
+
             _rowIndex = rowIndex;
             _colIndex = colIndex;
 
             _cellEntity = null;
+        }
+
+        public HCell[] getNeiborCells()
+        {
+            //return new HCell[] { _grid.Cells[_rowIndex + 1, _colIndex], _grid.Cells[_rowIndex - 1, _colIndex] };
+            //return new HCell[] { _grid.Cells[_colIndex + 1 + (_rowIndex + 1) * _colIndex], _grid.Cells[_colIndex - 1 + (_rowIndex - 1) * _colIndex] };
+            return new HCell[] { _grid.Cells[_colIndex + (_grid.Cols * _rowIndex)] };
         }
     }
 }
