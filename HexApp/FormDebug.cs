@@ -49,7 +49,7 @@ namespace HexApp
         private void drawGrid()
         {
 
-            HGrid grid = new HGrid(4, 4);
+            HGrid grid = new HGrid(102, 102);
 
 
 
@@ -77,12 +77,12 @@ namespace HexApp
             HCell[] cells = grid.Cells;
             HCell cell;
 
-            float r = 25F;
+            float r = 6.9F;
             float dx = 2.0F * r * (float)Math.Sin(Math.PI / 3);
             float dy = 1.5F * r;
 
 
-            float r2 = 24F;
+            float r2 = 6.5F;
             float dx2 = 2.0F * r2 * (float)Math.Sin(Math.PI / 3);
             float dy2 = 1.5F * r2;
 
@@ -111,7 +111,7 @@ namespace HexApp
             }
             
 
-            cell = cells[15];
+            cell = cells[125];
             
             HCell[] neiborCells = cell.getNeiborCells();
 
@@ -147,7 +147,7 @@ namespace HexApp
                 float x = cell.ColIndex * dx + 1 + (cell.RowIndex % 2 == 0 ? 0 : dx / 2) + r;
                 float y = cell.RowIndex * dy + 1 + r;
                 
-                g.DrawString(cell.RowIndex.ToString() + "," + cell.ColIndex.ToString(), fontBot, brushFont, x - r / 3, y - r / 3);
+                //g.DrawString(cell.RowIndex.ToString() + "," + cell.ColIndex.ToString(), fontBot, brushFont, x - r / 3, y - r / 3);
             }
             
             //_pbGridBufferGraphics.Render();

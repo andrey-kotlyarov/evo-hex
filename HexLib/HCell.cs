@@ -44,13 +44,21 @@ namespace HexLib
         {
             HCell[] neiborCells = new HCell[Enum.GetNames(typeof(HGridDirection)).Length];
 
-
+            /*
             int indexR = _index + 1;
             int indexBR = _index + _grid.Rows + 1 - (1 - _rowIndex % 2);
             int indexBL = _index + _grid.Rows - (1 - _rowIndex % 2);
             int indexL = _index - 1;
             int indexTL = _index - _grid.Rows - (1 - _rowIndex % 2);
             int indexTR = _index - _grid.Rows + 1 - (1 - _rowIndex % 2);
+            */
+            int indexR = _index + 1;
+            int indexBR = _index + _grid.Cols + 1 - (1 - _rowIndex % 2);
+            int indexBL = _index + _grid.Cols - (1 - _rowIndex % 2);
+            int indexL = _index - 1;
+            int indexTL = _index - _grid.Cols - (1 - _rowIndex % 2);
+            int indexTR = _index - _grid.Cols + 1 - (1 - _rowIndex % 2);
+
 
             int size = _grid.Rows * _grid.Cols;
 
